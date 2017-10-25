@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { PokedexProvider } from '../../providers/pokedex/pokedex';
 @Component({
   selector: 'page-home',
@@ -10,7 +10,7 @@ export class HomePage {
 	pokemons:any[];
 	pokemonId : number;
   errorMessage: string;
-  constructor(public navCtrl: NavController, public pokedexProvider: PokedexProvider) {
+  constructor(private modal: ModalController, public navCtrl: NavController, public pokedexProvider: PokedexProvider) {
   	this.pokemonId = 1;
     this.pokemons=[];
   }
@@ -19,16 +19,22 @@ export class HomePage {
   }
 
   getPokemon(){
-    console.log('oi');
   	this.pokedexProvider.getPokemon(this.pokemonId)
   	.subscribe(
       pokemon => this.pokemons.push(pokemon),
       error => this.errorMessage = <any>error
     );
+    console.log("oi");
     this.pokemonId++;
   }
+
   getPokemons(){
-    console.log(this.pokemons);
+  console.log(this.pokemons);
+  }
+
+  openModal(Pokemon){
+    const MyModal = this.modal.create('ModalPage', {Pokemon: Pokemon});
+    MyModal.present();
   }
 
 }

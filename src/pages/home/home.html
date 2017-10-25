@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Pokedéx Index</ion-title>
+  <ion-navbar color="danger">
+    <ion-title><img src="/assets/imgs/poke-logo.png" style="width:40%;"></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,11 +8,14 @@
   <ion-list>
   <ion-item *ngFor="let pokemon of pokemons">
     <ion-thumbnail item-start>
-      <img src={{pokemon.sprites.front_shiny}} style="width:100px;height:100px;">
+      <img src={{pokemon.sprites.front_shiny}} style="width:100%;height:100%;">
     </ion-thumbnail>
     <h2>{{pokemon.name}}</h2>
-    <button ion-button clear item-end>View</button>
+    <button ion-button (click)="openModal(pokemon)" clear item-end>View</button>
   </ion-item>
-</ion-list>
-<button (click)="getPokemon()" ion-button>Pegar mais um?</button>
+  </ion-list>
+  <div text-center>
+    <img src="/assets/imgs/poke.png"  (click)="getPokemon()" (click)="getPokemons()" class="botao">
+    <p class="legenda">Adicionar novos pokemons</p>
+  </div>
 </ion-content>

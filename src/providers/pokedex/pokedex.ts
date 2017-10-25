@@ -16,14 +16,15 @@ export class PokedexProvider {
   constructor(public http: Http) {
     console.log('Hello PokedexProvider Provider');
   }
+
 	getPokemon(id: number): Observable<any>{
    	return this.http.get(this.pokemonApiUrl + id)
    		.map(res => res.json())
-   		.catch(this.handleError);
+   		.catch(this.HandleError);
    }
-  private HandleError(error: any): Observable<any>{
-  	console.log('Deu merda');
-  	return Observable.throw(error.message || error);
-  }
+	 private HandleError(error: any): Observable<any>{
+		 console.log('Deu merda');
+		 return Observable.throw(error.message || error);
+	 }
 
 }
